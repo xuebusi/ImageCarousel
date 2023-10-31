@@ -56,14 +56,16 @@ struct ContentView: View {
                             let threshold: CGFloat = 50
                             
                             if value.translation.width > threshold {
-                                // 如果拖动距离超过阈值
+                                print("想右拖动:\(value.translation.width)")
+                                // 如果向右拖动距离超过阈值
                                 // 使用动画
                                 withAnimation {
                                     // 显示上一个颜色
                                     currentIndex = max(0, currentIndex - 1)
                                 }
                             } else if value.translation.width < -threshold {
-                                // 如果拖动距离小于阈值的负数
+                                print("想左拖动:\(value.translation.width)")
+                                // 如果向左拖动距离小于阈值的负数
                                 // 使用动画
                                 withAnimation {
                                     // 显示下一个颜色
@@ -88,7 +90,7 @@ struct ContentView: View {
                         Button {
                             withAnimation {
                                 // 显示上一个颜色
-                                currentIndex = max(0, currentIndex - 1)
+                                currentIndex = min(colors.count - 1, currentIndex + 1)
                             }
                         } label: {
                             // 使用左箭头图标
@@ -102,7 +104,7 @@ struct ContentView: View {
                         Button {
                             withAnimation {
                                 // 显示下一个颜色
-                                currentIndex = min(colors.count - 1, currentIndex + 1)
+                                currentIndex = max(0, currentIndex - 1)
                             }
                         } label: {
                             // 使用右箭头图标
